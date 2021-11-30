@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magento_HelloWorld::magento" title="Magento" module="Magento_HelloWorld" sortOrder="41" resource="Magento_HelloWorld::menu"/>
+        <add id="Magento_HelloWorld::menu" title="Magento Post" module="Magento_HelloWorld" sortOrder="10" resource="Magento_HelloWorld::menu" parent="Magento_HelloWorld::magento"/>
+        <add id="Magento_HelloWorld::post" title="Add New Post" module="Magento_HelloWorld" sortOrder="10" action="helloworld/post/addnew" resource="Magento_HelloWorld::post" parent="Magento_HelloWorld::menu"/>
+        <add id="Magento_HelloWorld::configuration" title="Grid" module="Magento_HelloWorld" sortOrder="20" parent="Magento_HelloWorld::menu" action="helloworld/post/index" resource="Magento_HelloWorld::configuration"/>
+    </menu>
+</config>

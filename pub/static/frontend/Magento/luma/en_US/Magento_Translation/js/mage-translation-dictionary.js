@@ -1,0 +1,1 @@
+/home/nhatdm1/work/magento-242/vendor/magento/module-translation/view/base/web/js/mage-translation-dictionary.js
