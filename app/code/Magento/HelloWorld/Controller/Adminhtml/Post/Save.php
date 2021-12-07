@@ -29,6 +29,9 @@ class Save extends Action
         $this->postFactory = $postFactory;
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface|void
+     */
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
@@ -44,8 +47,11 @@ class Save extends Action
         if ($id) {
             $post->load($id);
         }
+
         try {
-            $post->setData($newData)->isSaveAllowed();
+            $post->addData($newData);
+            $this->_eventManager->dispatch("my_module_event_after", ['postData' => $post]);
+            $post->save();
             $this->messageManager->addSuccessMessage(__('You saved the post.'));
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('You can not save the post.'));
