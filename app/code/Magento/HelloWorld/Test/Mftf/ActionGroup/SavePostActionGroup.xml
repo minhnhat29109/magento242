@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="SavePostActionGroup">
+        <annotations>
+            <description>Save Post</description>
+        </annotations>
+
+        <arguments>
+            <argument name="name" type="string" defaultValue="{{PostContent.name}}"/>
+            <argument name="content" type="string" defaultValue="{{PostContent.content}}"/>
+        </arguments>
+
+        <amOnPage url="{{SavePostPage.url}}" stepKey="savePost"/>
+        <fillField selector="{{SavePostFormSection.name}}" userInput="{{name}}" stepKey="fillName"/>
+        <fillField selector="{{SavePostFormSection.content}}" userInput="{{content}}" stepKey="fillContent"/>
+        <click selector="{{SavePostFormSection.save}}" stepKey="clickSaveButton" />
+
+        <closeAdminNotification stepKey="closeAdminNotification"/>
+    </actionGroup>
+</actionGroups>

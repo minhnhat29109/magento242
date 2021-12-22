@@ -1,0 +1,35 @@
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="SavePostTest">
+        <annotations>
+            <features value="Backend"/>
+            <stories value="Login on the Admin Login page"/>
+            <title value="Admin should be able to log into the Magento Admin backend successfully"/>
+            <description value="Admin should be able to log into the Magento Admin backend successfully"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="MAGETWO-71572"/>
+            <group value="example"/>
+            <group value="login"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
+        </before>
+
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost1"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost2"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost3"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost4"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost5"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost6"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost7"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost8"/>
+        <actionGroup ref="SavePostActionGroup" stepKey="savePost9"/>
+
+        <after>
+            <actionGroup ref="AdminLogoutActionGroup" stepKey="logoutFromAdmin"/>
+        </after>
+<!--        <actionGroup ref="" stepKey=""-->
+    </test>
+</tests>
