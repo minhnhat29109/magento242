@@ -17,9 +17,9 @@ return [
         'connection' => [
             'default' => [
                 'host' => 'localhost',
-                'dbname' => 'magento',
+                'dbname' => 'magento_242',
                 'username' => 'root',
-                'password' => '',
+                'password' => 'root',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'initStatements' => 'SET NAMES utf8;',
@@ -78,7 +78,7 @@ return [
         'vertex' => 1
     ],
     'downloadable_domains' => [
-        'magento-242.com'
+        'nhat.localhost.com'
     ],
     'install' => [
         'date' => 'Thu, 25 Nov 2021 02:23:58 +0000'
