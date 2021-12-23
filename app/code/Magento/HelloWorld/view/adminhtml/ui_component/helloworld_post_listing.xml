@@ -22,6 +22,7 @@
         <settings>
             <sticky>true</sticky>
         </settings>
+        <filterSearch name="fulltext"/>
         <bookmark name="bookmarks"/>
         <exportButton name="export_button"/>
         <columnsControls name="columns_controls"/>

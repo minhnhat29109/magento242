@@ -4,10 +4,21 @@ namespace Magento\HelloWorld\Model\Config;
 
 use Magento\HelloWorld\Model\PostFactory;
 use Magento\HelloWorld\Model\ResourceModel\Post\CollectionFactory;
+use Magento\Framework\Api\Filter;
+use Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilterFactory;
 
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
+    /**
+     * @var FulltextFilterFactory
+     */
+    protected $fulltextFilter;
+
+    /**
+     * @var array
+     */
     protected $_loadedData = [];
+
     /**
      * @param string $name
      * @param string $primaryFieldName
@@ -22,8 +33,10 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $requestFieldName,
         CollectionFactory $employeeCollectionFactory,
         array $meta = [],
-        array $data = []
+        array $data = [],
+        FulltextFilterFactory $fulltextFilter
     ) {
+        $this->fulltextFilter = $fulltextFilter;
         $this->collection = $employeeCollectionFactory->create();
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
@@ -43,5 +56,22 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->_loadedData[$item->getId()] = $item->getData();
         }
         return $this->_loadedData;
+    }
+
+    /**
+     * Add processing fulltext query
+     *
+     * Some workaround for fulltext search.
+     *
+     * @param Filter $filter
+     * @return void
+     */
+    public function addFilter(Filter $filter)
+    {
+        if ('fulltext' == $filter->getField()) {
+            $this->fulltextFilter->apply($this->collection, $filter);
+        } else {
+            parent::addFilter($filter);
+        }
     }
 }
