@@ -48,7 +48,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      */
     public function getData()
     {
-        if (isset($this->_loadedData)) {
+        if (!empty($this->_loadedData)) {
             return $this->_loadedData;
         }
         $items = $this->collection->getItems();

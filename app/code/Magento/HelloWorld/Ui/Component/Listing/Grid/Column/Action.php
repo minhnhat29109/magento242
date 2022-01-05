@@ -49,7 +49,7 @@ class Action extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 $item[$this->getData('name')] = [
                     'edit' => [
-                        'href' => $this->urlBuilder->getUrl('helloworld/post/addnew', ['id' => $item['post_id']]),
+                        'href' => $this->urlBuilder->getUrl('helloworld/post/edit', ['id' => $item['post_id']]),
                         'label' => __('Edit')
                     ]
                 ];

@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_cart_product_add_before">
+        <observer name="checkout_cart_product_add_before_observer" instance="Magento\HelloWorld\Observer\AddToCart"/>
+    </event>
+</config>

@@ -1,0 +1,61 @@
+<?php
+/** @var  Magento\HelloWorld\Block\Product\ListProduct $block */
+    $productCollection = $block->getProductCollection();
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+?>
+<div class="content-heading">
+    <h2 class="title">List Product</h2>
+    <p class="info">Here is what`s trending on Luma right now</p>
+</div>
+<div class="block widget block-products-list grid">
+    <div class="block-content">
+        <div class="products-grid grid">
+            <ol class="product-items widget-product-grid">
+                <?php foreach ($productCollection as $product) :?>
+                    <li class="product-item">
+                        <div class="product-item-info">
+                            <a href="<?= $block->escapeUrl($product->getProductUrl()) ?>">
+                                <span class="product-image-container" style="width: 240px;">
+                                    <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                                        <img width="240" height="300" loading="lazy" class="product-image-photo" src="<?= $block->getProductImageUrl($product->getId()) ?>">
+                                    </span>
+                                </span>
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <?= $product->getName() ?>
+                                </strong>
+                                <div class="product-reviews-summary short">
+                                    <div class="rating-summary">
+                                    </div>
+                                    <div class="reviews-actions">
+                                        <a class="action view" href="<?= $block->escapeUrl($product->getProductUrl()) ?>">
+                                            <?= $block->getReviewCollection($product->getId())->count() ?> Reviews
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="price-box price-final_price">
+                                    <span class="price">$<?= $product->getPrice() ?></span>
+                                </div>
+                            </div>
+                                <form data-role="tocart-form" action="<?= $listBlock->getAddToCartUrl($product); ?>" method="post">
+                                    <?= $block->getBlockHtml('formkey') ?>
+                                    <button type="submit"
+                                            title="Add to Cart"
+                                            class="action tocart primary">
+                                        <span><?= __('Add to Cart') ?></span>
+                                    </button>
+                                </form>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+
+
+

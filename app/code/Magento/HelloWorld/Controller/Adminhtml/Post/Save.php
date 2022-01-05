@@ -50,7 +50,12 @@ class Save extends Action
 
         try {
             $post->addData($newData);
-            $this->_eventManager->dispatch("my_module_event_after", ['postData' => $post]);
+
+            if (!$id)
+            {
+                $this->_eventManager->dispatch("my_module_event_after", ['postData' => $post]);
+            }
+
             $post->save();
             $this->messageManager->addSuccessMessage(__('You saved the post.'));
         } catch (\Exception $e) {
