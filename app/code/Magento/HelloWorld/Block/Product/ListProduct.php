@@ -131,12 +131,9 @@ class ListProduct extends \Magento\Framework\View\Element\Template
      */
     public function getProductImageUrl($id): string
     {
-        try
-        {
+        try {
             $product = $this->productFactory->create()->load($id);
-        }
-        catch (NoSuchEntityException $e)
-        {
+        }  catch (NoSuchEntityException $e) {
             return 'Data not found';
         }
         $url = $this->imageHelper->init($product, 'product_base_image')->getUrl();

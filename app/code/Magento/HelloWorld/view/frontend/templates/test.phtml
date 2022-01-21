@@ -39,7 +39,7 @@
                                     <span class="price">$<?= $product->getPrice() ?></span>
                                 </div>
                             </div>
-                                <form data-role="tocart-form" action="<?= $listBlock->getAddToCartUrl($product); ?>" method="post">
+                                <form class="atc-form-custom" data-product-name="<?= $product->getName()?>" data-role="tocart-form" action="<?= $listBlock->getUrl('helloworld/cart/add', ['product_id' => $product->getId()]); ?>" method="post">
                                     <?= $block->getBlockHtml('formkey') ?>
                                     <button type="submit"
                                             title="Add to Cart"
@@ -51,11 +51,65 @@
                     </li>
                 <?php endforeach; ?>
             </ol>
-        </div>
-    </div>
-</div>
 
+<!--modal-->
+            <div class="add-to-cart-modal-popup" style="display: none">
+                <p class="product-added" style="color: #2A6002"></p>
+                <span>Name:</span>
+                <span class="product-name" ></span><br>
+                <span>Price:</span>
+                <span class="product-price"></span>
+            </div>
 
+            <script>
+                require([
+                    'jquery',
+                ], function ($) {
+                    $('.atc-form-custom').submit(function(event){
+                        event.preventDefault();
+                        let self = this;
+                        $.ajax({
+                            url: $(self).attr('action'),
+                            data: {},
+                            type: 'post',
+                            dataType: 'json',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
 
+                            /** @inheritdoc */
+                            success: function (res) {
+                                // console.log(res.product);
 
+                                //Popup
+                                var popup = $('.add-to-cart-modal-popup').modal({
+                                    modalClass: 'add-to-cart-popup',
+                                    title: $.mage.__("POPUP MODAL"),
+                                    buttons: [
+                                        {
+                                            text: 'Continue',
+                                            click: function () {
+                                                this.closeModal();
+                                            }
+                                        },
+                                        {
+                                            text: 'Checkout',
+                                            click: function () {
+                                                window.location = window.checkout.checkoutUrl
+                                            }
+                                        }
+                                    ]
+                                });
+                                $('.product-added').html(res.product.name + ' has been added to cart.');
+                                $('.product-name').html(res.product.name);
+                                $('.product-price').html('$' + res.product.price);
+                                popup.modal('openModal');
 
+                                //reload mini cart
+                                require('Magento_Customer/js/customer-data').reload();
+
+                            },
+                        });
+                    });
+                })
+            </script>
